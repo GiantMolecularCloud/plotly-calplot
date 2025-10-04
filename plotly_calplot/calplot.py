@@ -78,8 +78,8 @@ def calplot(
     date_fmt: str = "%Y-%m-%d",
     skip_empty_years: bool = False,
     replace_nans_with_zeros: bool = True,
-    hovertemplate: Optional[str] = None,
-    customdata: Optional[np.ndarray] = None,
+    hovertemplate: str | None = None,
+    customdata: np.ndarray | None = None,
 ) -> go.Figure:
     """
     Yearly Calendar Heatmap
