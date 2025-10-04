@@ -2,6 +2,7 @@ from typing import List, Optional, Union
 
 from pandas.core.frame import DataFrame
 from plotly import graph_objects as go
+import numpy as np
 
 from plotly_calplot.date_extractors import get_date_coordinates, get_month_names
 from plotly_calplot.layout_formatter import (
@@ -35,6 +36,8 @@ def year_calplot(
     years_as_columns: bool = False,
     start_month: int = 1,
     end_month: int = 12,
+    hovertemplate: Optional[str] = None,
+    customdata: Optional[np.ndarray] = None,
 ) -> go.Figure:
     """
     Each year is subplotted separately and added to the main plot
@@ -58,6 +61,8 @@ def year_calplot(
         name,
         text=text,
         text_name=text_name,
+        hovertemplate=hovertemplate,
+        customdata=customdata,
     )
 
     if month_lines:

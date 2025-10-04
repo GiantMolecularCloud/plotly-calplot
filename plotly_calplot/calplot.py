@@ -78,6 +78,8 @@ def calplot(
     date_fmt: str = "%Y-%m-%d",
     skip_empty_years: bool = False,
     replace_nans_with_zeros: bool = True,
+    hovertemplate: Optional[str] = None,
+    customdata: Optional[np.ndarray] = None,
 ) -> go.Figure:
     """
     Yearly Calendar Heatmap
@@ -171,6 +173,15 @@ def calplot(
     replace_nans_with_zeros : bool = True
         If True, dates without data will be represented as 0.
         If False, dates without data will be represented as NaN.
+    
+    hovertemplate : Optional[str] = None
+        Custom hovertemplate for the heatmap squares.
+        If None, a default hovertemplate will be used.
+    
+    customdata : Optional[np.ndarray] = None
+        Additional data to be used in the hovertemplate.
+        Must be a 2D array of strings with as many rows as data and
+        as many columns as needed for the hovertemplate.
     """
     data[x] = validate_date_column(data[x], date_fmt)
     unique_years = data[x].dt.year.unique()
@@ -220,11 +231,21 @@ def calplot(
 
     for i, year in enumerate(unique_years):
         selected_year_data = data.loc[data[x].dt.year == year]
+        if customdata is not None:
+            customdata = DataFrame(customdata)
+            customdata[x] = selected_year_data[x]
+
         selected_year_data = fill_empty_with_zeros(
             selected_year_data, x, year, start_month, end_month
         )
         if replace_nans_with_zeros:
             selected_year_data[y] = selected_year_data[y].fillna(0)
+        
+        if customdata is not None:
+            customdata = fill_empty_with_zeros(
+                customdata, x, year, start_month, end_month
+            )
+            customdata = customdata.to_numpy()
 
         year_calplot(
             selected_year_data,
@@ -248,6 +269,8 @@ def calplot(
             years_as_columns=years_as_columns,
             start_month=start_month,
             end_month=end_month,
+            hovertemplate=hovertemplate,
+            customdata=customdata,
         )
 
     fig = apply_general_colorscaling(fig, cmap_min, cmap_max)

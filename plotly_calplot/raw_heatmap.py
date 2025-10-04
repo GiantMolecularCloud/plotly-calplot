@@ -17,13 +17,21 @@ def create_heatmap_without_formatting(
     name: str,
     text: Optional[List[str]] = None,
     text_name: Optional[str] = None,
+    hovertemplate: Optional[str] = None,
+    customdata: Optional[np.ndarray] = None,
 ) -> List[go.Figure]:
     hovertemplate_extra = ""
+    
     if text is not None:
         hovertemplate_extra = " <br>"
         if text_name is not None:
             hovertemplate_extra += f"{text_name}="
         hovertemplate_extra += "%{text}"
+    
+    if hovertemplate is None:
+        hovertemplate = "%{customdata[0]} <br>Week=%{x} <br>%{customdata[1]}=%{z}" + hovertemplate_extra
+        customdata = np.stack((data[x].astype(str), [name] * data.shape[0]), axis=-1)
+
     raw_heatmap = [
         go.Heatmap(
             x=weeknumber_of_dates,
@@ -34,11 +42,8 @@ def create_heatmap_without_formatting(
             showscale=False,
             colorscale=colorscale,  # user can setup their colorscale
             text=text,
-            hovertemplate=(
-                "%{customdata[0]} <br>Week=%{x} <br>%{customdata[1]}=%{z}"
-                + hovertemplate_extra
-            ),
-            customdata=np.stack((data[x].astype(str), [name] * data.shape[0]), axis=-1),
+            hovertemplate=hovertemplate,
+            customdata=customdata,
             name=str(year),
         )
     ]
