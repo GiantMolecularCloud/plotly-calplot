@@ -1,6 +1,15 @@
 # Calendar Heatmap with Plotly
 Making it easier to visualize and costumize time relevant or time series data with plotly interaction.
 
+## Changes in this fork
+
+- Added this fork info
+- Open up plotly dependency to `>=5.4.0` (might causes issues in the future with new plotly versions)
+- Fix small details (type hints, ...)
+
+
+## Description
+
 New to the library? Read [this Medium article](https://medium.com/@brunorosilva/5fc322125db7).
 
 This plot is a very similar to the contribuitions available on Github and Gitlab profile pages and to [Calplot](https://github.com/tomkwok/calplot) - which is a pyplot implementation of the calendar heatmap, thus it is not interactive right off the bat.
