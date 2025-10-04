@@ -164,8 +164,8 @@ def calplot(
         preventing empty subplots in the calendar heatmap.
 
     replace_nans_with_zeros : bool = True
-        If True, will replace NaN values in the y column with zeros.
-        This can fix some display issues for particular datasets.
+        If True, dates without data will be represented as 0.
+        If False, dates without data will be represented as NaN.
     """
     data[x] = validate_date_column(data[x], date_fmt)
     unique_years = data[x].dt.year.unique()
