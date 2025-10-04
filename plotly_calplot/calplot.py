@@ -62,7 +62,7 @@ def calplot(
     month_lines_color: str = "#9e9e9e",
     gap: int = 1,
     years_title: bool = False,
-    colorscale: str = "greens",
+    colorscale: str | list[tuple[int, str]] = "greens",
     title: str = "",
     month_lines: bool = True,
     total_height: Union[int, None] = None,
