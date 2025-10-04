@@ -8,6 +8,7 @@ Making it easier to visualize and costumize time relevant or time series data wi
 - Fix small details (type hints, ...)
 - Include skip_empty_years from [juan11iguel/plotly-calplot](https://github.com/juan11iguel/plotly-calplot)
 - Add option to replace NaN with zeros
+- Add poethepoet as task runner
 
 
 ## Description
