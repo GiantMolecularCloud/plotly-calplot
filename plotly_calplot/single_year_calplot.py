@@ -6,6 +6,7 @@ from plotly import graph_objects as go
 from plotly_calplot.date_extractors import get_date_coordinates, get_month_names
 from plotly_calplot.layout_formatter import (
     create_month_lines,
+    create_top_bottom_lines,
     decide_layout,
     update_plot_with_current_layout,
 )
@@ -21,12 +22,13 @@ def year_calplot(
     year: int,
     name: str = "y",
     dark_theme: bool = False,
+    month_lines: bool = True,
     month_lines_width: int = 1,
     month_lines_color: str = "#9e9e9e",
+    top_bottom_lines: bool = True,
     gap: int = 1,
     colorscale: str = "greens",
     title: str = "",
-    month_lines: bool = True,
     total_height: Union[int, None] = None,
     text: Optional[List[str]] = None,
     text_name: Optional[str] = None,
@@ -65,6 +67,14 @@ def year_calplot(
             month_lines_width,
             data[x],
             weekdays_in_year,
+            weeknumber_of_dates,
+        )
+    
+    if top_bottom_lines:
+        clpt = create_top_bottom_lines(
+            cplt,
+            month_lines_color,
+            month_lines_width,
             weeknumber_of_dates,
         )
 

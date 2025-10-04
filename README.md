@@ -10,7 +10,8 @@ Making it easier to visualize and costumize time relevant or time series data wi
 - Add option to replace NaN with zeros
 - Add poethepoet as task runner
 - Add option to show dates without entries as `0` instead of `NaN`
-
+- Add option `top_bottom_lines` to display the same lines that separate months also at the top and bottom. With `month_lines`, this fully encloses months (like in [https://calplot.readthedocs.io/en/latest/index.html](calplot)) and makes it much more appealing visually.
+- Also show line at end of last month, when option `month_lines` is enabled.
 
 
 ## Description

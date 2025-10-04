@@ -58,13 +58,14 @@ def calplot(
     y: str,
     name: str = "y",
     dark_theme: bool = False,
+    month_lines: bool = True,
     month_lines_width: int = 1,
     month_lines_color: str = "#9e9e9e",
+    top_bottom_lines: bool = True,
     gap: int = 1,
     years_title: bool = False,
     colorscale: str | list[tuple[int, str]] = "greens",
     title: str = "",
-    month_lines: bool = True,
     total_height: Union[int, None] = None,
     space_between_plots: float = 0.08,
     showscale: bool = False,
@@ -97,61 +98,65 @@ def calplot(
         Option for creating a dark themed plot
 
     month_lines: bool = True
-        if true will plot a separation line between
-        each month in the calendar
+        If true will plot a separation line between
+        each month in the calendar.
 
     month_lines_width : int = 1
-        if month_lines this option controls the width of
-        the line between each month in the calendar
+        If month_lines this option controls the width of
+        the line between each month in the calendar.
 
     month_lines_color : str = "#9e9e9e"
-        if month_lines this option controls the color of
-        the line between each month in the calendar
+        If month_lines this option controls the color of
+        the line between each month in the calendar.
 
+    top_bottom_lines : bool = True
+        If true will plot a separation line at the top and bottom.
+        Together with month_lines, this makes the months enclosed.
+        
     gap : int = 1
-        controls the gap bewteen daily squares
+        Controls the gap bewteen daily squares.
 
     years_title : bool = False
-        if true will add a title for each subplot with the
-        correspondent year
+        If true will add a title for each subplot with the
+        correspondent year.
 
     colorscale : str = "greens"
-        controls the colorscale for the calendar, works
+        Controls the colorscale for the calendar, works
         with all the standard Plotly Colorscales and also
-        supports custom colorscales made by the user
+        supports custom colorscales made by the user.
 
     title : str = ""
-        title of the plot
+        Title of the plot
 
     total_height : int = None
-        if provided a value, will force the plot to have a specific
+        If provided a value, will force the plot to have a specific
         height, otherwise the total height will be calculated
-        according to the amount of years in data
+        according to the amount of years in data.
 
     space_between_plots : float = 0.08
-        controls the vertical space between the plots
+        Controls the vertical space between the plots.
 
     showscale : bool = False
-        if True, a color legend will be created.
+        If True, a color legend will be created.
         Thanks to @ghhar98!
 
     text : Optional[str] = None
         The name of the column in data to include in hovertext.
 
     years_as_columns : bool = False
-        if True will plot all years in a single line
+        If True will plot all years in a single line.
 
     cmap_min : float = None
-        colomap min, defaults to min value of the data
+        Colomap min, defaults to min value of the data
 
     cmap_max : float = None
-        colomap max, defaults to max value of the data
+        Colomap max, defaults to max value of the data
 
     start_month : int = 1
-        starting month range to plot, defaults to 1 (January)
+        Starting month range to plot, defaults to 1 (January).
 
     end_month : int = 12
-        ending month range to plot, defaults to 12 (December)
+        Ending month range to plot, defaults to 12 (December).
 
     date_fmt : str = "%Y-%m-%d"
         date format for the date column in data, defaults to "%Y-%m-%d"
@@ -229,6 +234,7 @@ def calplot(
             month_lines=month_lines,
             month_lines_width=month_lines_width,
             month_lines_color=month_lines_color,
+            top_bottom_lines=top_bottom_lines,
             colorscale=colorscale,
             year=year,
             fig=fig,

@@ -78,6 +78,8 @@ def create_month_lines(
         line=dict(color=month_lines_color, width=month_lines_width),
         hoverinfo="skip",
     )
+
+    # lines at start of each month
     for date, dow, wkn in zip(data, weekdays_in_year, weeknumber_of_dates):
         if date.day == 1:
             cplt += [go.Scatter(x=[wkn - 0.5, wkn - 0.5], y=[dow - 0.5, 6.5], **kwargs)]
@@ -88,6 +90,48 @@ def create_month_lines(
                     ),
                     go.Scatter(x=[wkn + 0.5, wkn + 0.5], y=[dow - 0.5, -0.5], **kwargs),
                 ]
+    
+    # end of last month
+    date = data.iloc[-1]
+    dow = weekdays_in_year[-1]
+    wkn = weeknumber_of_dates[-1]
+    cplt += [go.Scatter(x=[wkn + 0.5, wkn + 0.5], y=[-0.5, dow + 0.5], **kwargs)]
+    if dow != 6:
+        cplt += [
+            go.Scatter(x=[wkn - 0.5, wkn + 0.5], y=[dow + 0.5, dow + 0.5], **kwargs),
+            go.Scatter(x=[wkn - 0.5, wkn - 0.5], y=[dow + 0.5, 6.5], **kwargs),
+        ]
+
+    return cplt
+
+
+def create_top_bottom_lines(
+    cplt: List[go.Figure],
+    month_lines_color: str,
+    month_lines_width: int,
+    weeknumber_of_dates: List[int],
+) -> go.Figure:
+    kwargs = dict(
+        mode="lines",
+        line=dict(color=month_lines_color, width=month_lines_width),
+        hoverinfo="skip",
+    )
+    # top line
+    cplt += [
+        go.Scatter(
+            x=[min(weeknumber_of_dates) + 0.5, max(weeknumber_of_dates) + 0.5],
+            y=[-0.5, -0.5],
+            **kwargs,
+        )
+    ]
+    # bottom line
+    cplt += [
+        go.Scatter(
+            x=[min(weeknumber_of_dates) - 0.5, max(weeknumber_of_dates) - 0.5],
+            y=[6.5, 6.5],
+            **kwargs,
+        )
+    ]
     return cplt
 
 
