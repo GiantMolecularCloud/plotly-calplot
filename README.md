@@ -12,7 +12,8 @@ Making it easier to visualize and costumize time relevant or time series data wi
 - Add option to show dates without entries as `0` instead of `NaN`
 - Add option `top_bottom_lines` to display the same lines that separate months also at the top and bottom. With `month_lines`, this fully encloses months (like in [calplot](https://calplot.readthedocs.io/en/latest/index.html)) and makes it much more appealing visually.
 - Also show line at end of last month, when option `month_lines` is enabled.
-- Allow to set hovertemplate and customdata. Note that this can be a bit fiddly to get to work exactly how you want it.
+- Allow to set `hovertemplate` and `customdata`. Note that this can be a bit fiddly to get to work exactly how you want it.
+- Fixed code quality (isort, black, flake8, mypy)
 
 **Updated plotly-calplot**
 <img src="https://github.com/giantmolecularcloud/plotly-calplot/blob/main/assets/images/example_updated.png?raw=true">

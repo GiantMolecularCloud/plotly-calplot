@@ -1,6 +1,8 @@
+"""Welcome to plotly_calplot."""
+
 from .calplot import calplot, month_calplot
 
-__version__ = "0.0.2"
+__version__ = "0.2.0"
 
 __all__ = [
     "calplot",

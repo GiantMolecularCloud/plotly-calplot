@@ -1,3 +1,5 @@
+"""Module for creating a raw heatmap for a single year calplot."""
+
 from typing import List, Optional
 
 import numpy as np
@@ -13,7 +15,7 @@ def create_heatmap_without_formatting(
     weekdays_in_year: List[float],
     gap: int,
     year: int,
-    colorscale: str,
+    colorscale: str | list[tuple[int, str]],
     name: str,
     text: Optional[List[str]] = None,
     text_name: Optional[str] = None,
@@ -21,13 +23,13 @@ def create_heatmap_without_formatting(
     customdata: Optional[np.ndarray] = None,
 ) -> List[go.Figure]:
     hovertemplate_extra = ""
-    
+
     if text is not None:
         hovertemplate_extra = " <br>"
         if text_name is not None:
             hovertemplate_extra += f"{text_name}="
         hovertemplate_extra += "%{text}"
-    
+
     if hovertemplate is None:
         hovertemplate = "%{customdata[0]} <br>Week=%{x} <br>%{customdata[1]}=%{z}" + hovertemplate_extra
         customdata = np.stack((data[x].astype(str), [name] * data.shape[0]), axis=-1)

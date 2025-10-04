@@ -58,9 +58,7 @@ class TestMonthCalplot(TestCase):
         self.assertIsInstance(cp.data, tuple)
 
     def test_should_create_black_theme_multi_year(self) -> None:
-        cp = month_calplot(
-            self.multi_year_sample_dataframe, "ds", "value", dark_theme=True
-        )
+        cp = month_calplot(self.multi_year_sample_dataframe, "ds", "value", dark_theme=True)
 
         self.assertEqual(len(cp.data), 1)  # Only one figure
         self.assertEqual(len(cp.layout.yaxis.tickvals), 7)

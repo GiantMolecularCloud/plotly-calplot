@@ -4,11 +4,7 @@ from unittest import TestCase
 import pandas as pd
 from plotly import graph_objects as go
 
-from plotly_calplot.layout_formatter import (
-    create_month_lines,
-    decide_layout,
-    update_plot_with_current_layout,
-)
+from plotly_calplot.layout_formatter import create_month_lines, decide_layout, update_plot_with_current_layout
 
 
 class TestLayouting(TestCase):
@@ -33,15 +29,11 @@ class TestLayouting(TestCase):
         self.weekdays_in_year = [1.0, 1.0, 3.0, 6.0, 0.0, 1.0, 2.0, 3.0, 4.0, 3.0]
 
     def test_should_create_layout_with_black_theme(self) -> None:
-        result_layout = decide_layout(
-            True, "title", ["January", "March", "April"], [0, 1, 2]
-        )
+        result_layout = decide_layout(True, "title", ["January", "March", "April"], [0, 1, 2])
         self.assertTrue(type(result_layout) == go.Layout)
 
     def test_should_create_layout_with_light_theme(self) -> None:
-        result_layout = decide_layout(
-            False, "title", ["January", "March", "April"], [0, 1, 2]
-        )
+        result_layout = decide_layout(False, "title", ["January", "March", "April"], [0, 1, 2])
         self.assertTrue(type(result_layout) == go.Layout)
 
     def test_should_create_month_lines(self) -> None:

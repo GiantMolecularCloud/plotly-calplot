@@ -1,25 +1,19 @@
+"""Module for extracting date-related information from a DataFrame."""
+
 from typing import Any, List, Tuple
 
 import numpy as np
 import pandas as pd
 
 
-def get_month_names(
-    data: pd.DataFrame, x: str, start_month: int = 1, end_month: int = 12
-) -> List[str]:
+def get_month_names(data: pd.DataFrame, x: str, start_month: int = 1, end_month: int = 12) -> List[str]:
     start_month_names_filler = [None] * (start_month - 1)
     end_month_names_filler = [None] * (12 - end_month)
-    month_names = list(
-        start_month_names_filler
-        + data[x].dt.month_name().unique().tolist()
-        + end_month_names_filler
-    )
+    month_names = list(start_month_names_filler + data[x].dt.month_name().unique().tolist() + end_month_names_filler)
     return month_names
 
 
-def get_date_coordinates(
-    data: pd.DataFrame, x: str
-) -> Tuple[Any, List[float], List[int]]:
+def get_date_coordinates(data: pd.DataFrame, x: str) -> Tuple[Any, List[float], List[int]]:
     month_days = []
     for m in data[x].dt.month.unique():
         month_days.append(data.loc[data[x].dt.month == m, x].max().day)

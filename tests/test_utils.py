@@ -85,9 +85,7 @@ class TestUtils(TestCase):
         )
         date_fmt = "%Y-%m-%d"
 
-        self.assertTrue(
-            validate_date_column(date_column, date_fmt).dtype == "datetime64[ns]"
-        )
+        self.assertTrue(validate_date_column(date_column, date_fmt).dtype == "datetime64[ns]")
 
     def test_validate_date_column_singapore_tz(self) -> None:
         tz = pytz.timezone("Singapore")
@@ -100,6 +98,4 @@ class TestUtils(TestCase):
         )
         date_fmt = "%Y-%m-%d"
 
-        self.assertTrue(
-            validate_date_column(date_column, date_fmt).dtype == "datetime64[ns]"
-        )
+        self.assertTrue(validate_date_column(date_column, date_fmt).dtype == "datetime64[ns]")

@@ -33,9 +33,7 @@ class TestUtils(TestCase):
         self.assertEqual(month_names, expected_result)
 
     def test_should_get_date_right_coordinates(self) -> None:
-        month_positions, weekdays_in_year, weeknumber_of_dates = get_date_coordinates(
-            self.sample_dataframe, "ds"
-        )
+        month_positions, weekdays_in_year, weeknumber_of_dates = get_date_coordinates(self.sample_dataframe, "ds")
 
         self.assertEqual(len(month_positions), 12)
         self.assertTrue(type(month_positions) == np.ndarray)

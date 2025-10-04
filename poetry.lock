@@ -26,6 +26,18 @@ doc = ["docutils", "jinja2", "myst-parser", "numpydoc", "pillow (>=9,<10)", "pyd
 save = ["vl-convert-python (>=1.7.0)"]
 
 [[package]]
+name = "astor"
+version = "0.8.1"
+description = "Read/rewrite/write Python ASTs"
+optional = false
+python-versions = "!=3.0.*,!=3.1.*,!=3.2.*,!=3.3.*,>=2.7"
+groups = ["dev"]
+files = [
+    {file = "astor-0.8.1-py2.py3-none-any.whl", hash = "sha256:070a54e890cefb5b3739d19f30f5a5ec840ffc9c50ffa7d23cc9fc1a38ebbfc5"},
+    {file = "astor-0.8.1.tar.gz", hash = "sha256:6a6effda93f4e1ce9f618779b2dd1d9d84f1e32812c23a29b3fff6fd7f63fa5e"},
+]
+
+[[package]]
 name = "attrs"
 version = "25.3.0"
 description = "Classes Without Boilerplate"
@@ -234,6 +246,20 @@ files = [
 colorama = {version = "*", markers = "platform_system == \"Windows\""}
 
 [[package]]
+name = "cognitive-complexity"
+version = "1.3.0"
+description = "Library to calculate Python functions cognitive complexity via code"
+optional = false
+python-versions = ">=3.6"
+groups = ["dev"]
+files = [
+    {file = "cognitive_complexity-1.3.0.tar.gz", hash = "sha256:a0cfbd47dee0b19f4056f892389f501694b205c3af69fb703cc744541e03dde5"},
+]
+
+[package.dependencies]
+setuptools = "*"
+
+[[package]]
 name = "colorama"
 version = "0.4.6"
 description = "Cross-platform colored terminal text."
@@ -387,20 +413,230 @@ test = ["pytest (>=6)"]
 
 [[package]]
 name = "flake8"
-version = "4.0.1"
+version = "6.1.0"
 description = "the modular source code checker: pep8 pyflakes and co"
+optional = false
+python-versions = ">=3.8.1"
+groups = ["dev"]
+files = [
+    {file = "flake8-6.1.0-py2.py3-none-any.whl", hash = "sha256:ffdfce58ea94c6580c77888a86506937f9a1a227dfcd15f245d694ae20a6b6e5"},
+    {file = "flake8-6.1.0.tar.gz", hash = "sha256:d5b3857f07c030bdb5bf41c7f53799571d75c4491748a3adcd47de929e34cd23"},
+]
+
+[package.dependencies]
+mccabe = ">=0.7.0,<0.8.0"
+pycodestyle = ">=2.11.0,<2.12.0"
+pyflakes = ">=3.1.0,<3.2.0"
+
+[[package]]
+name = "flake8-annotations"
+version = "3.1.1"
+description = "Flake8 Type Annotation Checks"
+optional = false
+python-versions = ">=3.8.1"
+groups = ["dev"]
+files = [
+    {file = "flake8_annotations-3.1.1-py3-none-any.whl", hash = "sha256:102935bdcbfa714759a152aeb07b14aee343fc0b6f7c55ad16968ce3e0e91a8a"},
+    {file = "flake8_annotations-3.1.1.tar.gz", hash = "sha256:6c98968ccc6bdc0581d363bf147a87df2f01d0d078264b2da805799d911cf5fe"},
+]
+
+[package.dependencies]
+attrs = ">=21.4"
+flake8 = ">=5.0"
+
+[[package]]
+name = "flake8-black"
+version = "0.4.0"
+description = "flake8 plugin to call black as a code style validator"
+optional = false
+python-versions = ">=3.9"
+groups = ["dev"]
+files = [
+    {file = "flake8_black-0.4.0-py3-none-any.whl", hash = "sha256:288762d0c9ea065782d87eeecbcc20c69079d17fe1d0f0445f0eb0b0ffb80c39"},
+    {file = "flake8_black-0.4.0.tar.gz", hash = "sha256:bf226868f695dee48d55ff6d7747e900709bfd6f605b7a378c70e711e3fc26cb"},
+]
+
+[package.dependencies]
+black = ">=22.1.0"
+flake8 = ">=3"
+tomli = {version = "*", markers = "python_version < \"3.11\""}
+
+[package.extras]
+develop = ["build", "twine"]
+
+[[package]]
+name = "flake8-bugbear"
+version = "23.12.2"
+description = "A plugin for flake8 finding likely bugs and design problems in your program. Contains warnings that don't belong in pyflakes and pycodestyle."
+optional = false
+python-versions = ">=3.8.1"
+groups = ["dev"]
+files = [
+    {file = "flake8-bugbear-23.12.2.tar.gz", hash = "sha256:32b2903e22331ae04885dae25756a32a8c666c85142e933f43512a70f342052a"},
+    {file = "flake8_bugbear-23.12.2-py3-none-any.whl", hash = "sha256:83324bad4d90fee4bf64dd69c61aff94debf8073fbd807c8b6a36eec7a2f0719"},
+]
+
+[package.dependencies]
+attrs = ">=19.2.0"
+flake8 = ">=6.0.0"
+
+[package.extras]
+dev = ["coverage", "hypothesis", "hypothesmith (>=0.2)", "pre-commit", "pytest", "tox"]
+
+[[package]]
+name = "flake8-cognitive-complexity"
+version = "0.1.0"
+description = "An extension for flake8 that validates cognitive functions complexity"
 optional = false
 python-versions = ">=3.6"
 groups = ["dev"]
 files = [
-    {file = "flake8-4.0.1-py2.py3-none-any.whl", hash = "sha256:479b1304f72536a55948cb40a32dce8bb0ffe3501e26eaf292c7e60eb5e0428d"},
-    {file = "flake8-4.0.1.tar.gz", hash = "sha256:806e034dda44114815e23c16ef92f95c91e4c71100ff52813adf7132a6ad870d"},
+    {file = "flake8_cognitive_complexity-0.1.0.tar.gz", hash = "sha256:f202df054e4f6ff182b659c261922b9c684628a47beb19cb0973c50d6a7831c1"},
 ]
 
 [package.dependencies]
-mccabe = ">=0.6.0,<0.7.0"
-pycodestyle = ">=2.8.0,<2.9.0"
-pyflakes = ">=2.4.0,<2.5.0"
+cognitive_complexity = "*"
+setuptools = "*"
+
+[[package]]
+name = "flake8-comprehensions"
+version = "3.17.0"
+description = "A flake8 plugin to help you write better list/set/dict comprehensions."
+optional = false
+python-versions = ">=3.9"
+groups = ["dev"]
+files = [
+    {file = "flake8_comprehensions-3.17.0-py3-none-any.whl", hash = "sha256:3943a9c6f2593c3bc5cc64106c2f89d63c6ecd49c8343597f8257b8fcfc8b0a2"},
+    {file = "flake8_comprehensions-3.17.0.tar.gz", hash = "sha256:bf4fa102b2bf4d6c9e999e29e4b2724cbadffb70b937600fc782161be4dc0f4a"},
+]
+
+[package.dependencies]
+flake8 = ">=3,<3.2 || >3.2"
+
+[[package]]
+name = "flake8-debugger"
+version = "4.1.2"
+description = "ipdb/pdb statement checker plugin for flake8"
+optional = false
+python-versions = ">=3.7"
+groups = ["dev"]
+files = [
+    {file = "flake8-debugger-4.1.2.tar.gz", hash = "sha256:52b002560941e36d9bf806fca2523dc7fb8560a295d5f1a6e15ac2ded7a73840"},
+    {file = "flake8_debugger-4.1.2-py3-none-any.whl", hash = "sha256:0a5e55aeddcc81da631ad9c8c366e7318998f83ff00985a49e6b3ecf61e571bf"},
+]
+
+[package.dependencies]
+flake8 = ">=3.0"
+pycodestyle = "*"
+
+[[package]]
+name = "flake8-docstrings"
+version = "1.7.0"
+description = "Extension for flake8 which uses pydocstyle to check docstrings"
+optional = false
+python-versions = ">=3.7"
+groups = ["dev"]
+files = [
+    {file = "flake8_docstrings-1.7.0-py2.py3-none-any.whl", hash = "sha256:51f2344026da083fc084166a9353f5082b01f72901df422f74b4d953ae88ac75"},
+    {file = "flake8_docstrings-1.7.0.tar.gz", hash = "sha256:4c8cc748dc16e6869728699e5d0d685da9a10b0ea718e090b1ba088e67a941af"},
+]
+
+[package.dependencies]
+flake8 = ">=3"
+pydocstyle = ">=2.1"
+
+[[package]]
+name = "flake8-formatter-junit-xml"
+version = "0.0.6"
+description = "JUnit XML Formatter for flake8"
+optional = false
+python-versions = "*"
+groups = ["dev"]
+files = [
+    {file = "flake8_formatter_junit_xml-0.0.6-py2.py3-none-any.whl", hash = "sha256:6358a44ecafdf0f9c8ee5314859b8d6f553dc2e55e946a24c538185e1eba7ce6"},
+    {file = "flake8_formatter_junit_xml-0.0.6.tar.gz", hash = "sha256:1ddd9356bb30ba736c3f14c769c837cfacf4f79c3d383ab963ef9d38eea05a9c"},
+]
+
+[package.dependencies]
+flake8 = ">3.0.0"
+junit-xml = ">=1.8"
+
+[[package]]
+name = "flake8-isort"
+version = "6.1.2"
+description = "flake8 plugin that integrates isort"
+optional = false
+python-versions = ">=3.9"
+groups = ["dev"]
+files = [
+    {file = "flake8_isort-6.1.2-py3-none-any.whl", hash = "sha256:549197dedf0273502fb74f04c080beed9e62a7eb70244610413d27052e78bd3b"},
+    {file = "flake8_isort-6.1.2.tar.gz", hash = "sha256:9d0452acdf0e1cd6f2d6848e3605e66b54d920e73471fb4744eef0f93df62d5d"},
+]
+
+[package.dependencies]
+flake8 = "*"
+isort = ">=5.0.0,<7"
+
+[package.extras]
+test = ["pytest"]
+
+[[package]]
+name = "flake8-mutable"
+version = "1.2.0"
+description = "mutable defaults flake8 extension"
+optional = false
+python-versions = "*"
+groups = ["dev"]
+files = [
+    {file = "flake8-mutable-1.2.0.tar.gz", hash = "sha256:ee9b77111b867d845177bbc289d87d541445ffcc6029a0c5c65865b42b18c6a6"},
+    {file = "flake8_mutable-1.2.0-py2-none-any.whl", hash = "sha256:38fd9dadcbcda6550a916197bc40ed76908119dabb37fbcca30873666c31d2d5"},
+]
+
+[package.dependencies]
+flake8 = "*"
+
+[[package]]
+name = "flake8-plugin-utils"
+version = "1.3.3"
+description = "The package provides base classes and utils for flake8 plugin writing"
+optional = false
+python-versions = ">=3.6,<4.0"
+groups = ["dev"]
+files = [
+    {file = "flake8-plugin-utils-1.3.3.tar.gz", hash = "sha256:39f6f338d038b301c6fd344b06f2e81e382b68fa03c0560dff0d9b1791a11a2c"},
+    {file = "flake8_plugin_utils-1.3.3-py3-none-any.whl", hash = "sha256:e4848c57d9d50f19100c2d75fa794b72df068666a9041b4b0409be923356a3ed"},
+]
+
+[[package]]
+name = "flake8-simplify"
+version = "0.21.0"
+description = "flake8 plugin which checks for code that can be simplified"
+optional = false
+python-versions = ">=3.6.1"
+groups = ["dev"]
+files = [
+    {file = "flake8_simplify-0.21.0-py3-none-any.whl", hash = "sha256:439391e762a9370b371208add0b5c5c40c3d25a98e1f5421d263215d08194183"},
+    {file = "flake8_simplify-0.21.0.tar.gz", hash = "sha256:c95ff1dcc1de5949af47e0087cbf1164445881131b15bcd7a71252670f492f4d"},
+]
+
+[package.dependencies]
+astor = ">=0.1"
+flake8 = ">=3.7"
+
+[[package]]
+name = "flake8-super"
+version = "0.1.3"
+description = "Python 3 super() check for flake8"
+optional = false
+python-versions = "*"
+groups = ["dev"]
+files = [
+    {file = "flake8_super-0.1.3-py3-none-any.whl", hash = "sha256:595cd65af908574867accfaa3ea2b3e4790637711859306550dc433d9105cbba"},
+]
+
+[package.dependencies]
+flake8 = ">3.0.0"
+flake8-plugin-utils = ">=1.3.2,<1.4.0"
 
 [[package]]
 name = "gitdb"
@@ -535,6 +771,21 @@ files = [
 referencing = ">=0.31.0"
 
 [[package]]
+name = "junit-xml"
+version = "1.9"
+description = "Creates JUnit XML test result documents that can be read by tools such as Jenkins"
+optional = false
+python-versions = "*"
+groups = ["dev"]
+files = [
+    {file = "junit-xml-1.9.tar.gz", hash = "sha256:de16a051990d4e25a3982b2dd9e89d671067548718866416faec14d9de56db9f"},
+    {file = "junit_xml-1.9-py2.py3-none-any.whl", hash = "sha256:ec5ca1a55aefdd76d28fcc0b135251d156c7106fa979686a4b48d62b761b4732"},
+]
+
+[package.dependencies]
+six = "*"
+
+[[package]]
 name = "markupsafe"
 version = "3.0.3"
 description = "Safely add untrusted strings to HTML/XML markup."
@@ -635,14 +886,14 @@ files = [
 
 [[package]]
 name = "mccabe"
-version = "0.6.1"
+version = "0.7.0"
 description = "McCabe checker, plugin for flake8"
 optional = false
-python-versions = "*"
+python-versions = ">=3.6"
 groups = ["dev"]
 files = [
-    {file = "mccabe-0.6.1-py2.py3-none-any.whl", hash = "sha256:ab8a6258860da4b6677da4bd2fe5dc2c659cff31b3ee4f7f5d64e79735b80d42"},
-    {file = "mccabe-0.6.1.tar.gz", hash = "sha256:dd8d182285a0fe56bace7f45b5e7d1a6ebcbf524e8f3bd87eb0f125271b8831f"},
+    {file = "mccabe-0.7.0-py2.py3-none-any.whl", hash = "sha256:6c2d30ab6be0e4a46919781807b4f0d834ebdd6c6e3dca0bda5a15f863427b6e"},
+    {file = "mccabe-0.7.0.tar.gz", hash = "sha256:348e0240c33b60bbdf4e523192ef919f28cb2c3d7d5c7794f74009290f236325"},
 ]
 
 [[package]]
@@ -1031,6 +1282,21 @@ files = [
 ]
 
 [[package]]
+name = "pep8-naming"
+version = "0.13.3"
+description = "Check PEP-8 naming conventions, plugin for flake8"
+optional = false
+python-versions = ">=3.7"
+groups = ["dev"]
+files = [
+    {file = "pep8-naming-0.13.3.tar.gz", hash = "sha256:1705f046dfcd851378aac3be1cd1551c7c1e5ff363bacad707d43007877fa971"},
+    {file = "pep8_naming-0.13.3-py3-none-any.whl", hash = "sha256:1a86b8c71a03337c97181917e2b472f0f5e4ccb06844a0d6f0a33522549e7a80"},
+]
+
+[package.dependencies]
+flake8 = ">=5.0.0"
+
+[[package]]
 name = "pillow"
 version = "11.3.0"
 description = "Python Imaging Library (Fork)"
@@ -1309,14 +1575,14 @@ test = ["cffi", "hypothesis", "pandas", "pytest", "pytz"]
 
 [[package]]
 name = "pycodestyle"
-version = "2.8.0"
+version = "2.11.1"
 description = "Python style guide checker"
 optional = false
-python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*"
+python-versions = ">=3.8"
 groups = ["dev"]
 files = [
-    {file = "pycodestyle-2.8.0-py2.py3-none-any.whl", hash = "sha256:720f8b39dde8b293825e7ff02c475f3077124006db4f440dcbc9a20b76548a20"},
-    {file = "pycodestyle-2.8.0.tar.gz", hash = "sha256:eddd5847ef438ea1c7870ca7eb78a9d47ce0cdb4851a5523949f2601d0cbbe7f"},
+    {file = "pycodestyle-2.11.1-py2.py3-none-any.whl", hash = "sha256:44fe31000b2d866f2e41841b18528a505fbd7fef9017b04eff4e2648a0fadc67"},
+    {file = "pycodestyle-2.11.1.tar.gz", hash = "sha256:41ba0e7afc9752dfb53ced5489e89f8186be00e599e712660695b7a75ff2663f"},
 ]
 
 [[package]]
@@ -1340,15 +1606,33 @@ carto = ["pydeck-carto"]
 jupyter = ["ipykernel (>=5.1.2) ; python_version >= \"3.4\"", "ipython (>=5.8.0) ; python_version < \"3.4\"", "ipywidgets (>=7,<8)", "traitlets (>=4.3.2)"]
 
 [[package]]
-name = "pyflakes"
-version = "2.4.0"
-description = "passive checker of Python programs"
+name = "pydocstyle"
+version = "6.3.0"
+description = "Python docstring style checker"
 optional = false
-python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
+python-versions = ">=3.6"
 groups = ["dev"]
 files = [
-    {file = "pyflakes-2.4.0-py2.py3-none-any.whl", hash = "sha256:3bb3a3f256f4b7968c9c788781e4ff07dce46bdf12339dcda61053375426ee2e"},
-    {file = "pyflakes-2.4.0.tar.gz", hash = "sha256:05a85c2872edf37a4ed30b0cce2f6093e1d0581f8c19d7393122da7e25b2b24c"},
+    {file = "pydocstyle-6.3.0-py3-none-any.whl", hash = "sha256:118762d452a49d6b05e194ef344a55822987a462831ade91ec5c06fd2169d019"},
+    {file = "pydocstyle-6.3.0.tar.gz", hash = "sha256:7ce43f0c0ac87b07494eb9c0b462c0b73e6ff276807f204d6b53edc72b7e44e1"},
+]
+
+[package.dependencies]
+snowballstemmer = ">=2.2.0"
+
+[package.extras]
+toml = ["tomli (>=1.2.3) ; python_version < \"3.11\""]
+
+[[package]]
+name = "pyflakes"
+version = "3.1.0"
+description = "passive checker of Python programs"
+optional = false
+python-versions = ">=3.8"
+groups = ["dev"]
+files = [
+    {file = "pyflakes-3.1.0-py2.py3-none-any.whl", hash = "sha256:4132f6d49cb4dae6819e5379898f2b8cce3c5f23994194c24b77d5da2e36f774"},
+    {file = "pyflakes-3.1.0.tar.gz", hash = "sha256:a0aae034c444db0071aa077972ba4768d40c830d9539fd45bf4cd3f8f6992efc"},
 ]
 
 [[package]]
@@ -1409,6 +1693,57 @@ pytest = ">=7"
 
 [package.extras]
 testing = ["process-tests", "pytest-xdist", "virtualenv"]
+
+[[package]]
+name = "pytest-rerunfailures"
+version = "15.1"
+description = "pytest plugin to re-run tests to eliminate flaky failures"
+optional = false
+python-versions = ">=3.9"
+groups = ["dev"]
+files = [
+    {file = "pytest_rerunfailures-15.1-py3-none-any.whl", hash = "sha256:f674c3594845aba8b23c78e99b1ff8068556cc6a8b277f728071fdc4f4b0b355"},
+    {file = "pytest_rerunfailures-15.1.tar.gz", hash = "sha256:c6040368abd7b8138c5b67288be17d6e5611b7368755ce0465dda0362c8ece80"},
+]
+
+[package.dependencies]
+packaging = ">=17.1"
+pytest = ">=7.4,<8.2.2 || >8.2.2"
+
+[[package]]
+name = "pytest-sugar"
+version = "0.9.7"
+description = "pytest-sugar is a plugin for pytest that changes the default look and feel of pytest (e.g. progressbar, show tests that fail instantly)."
+optional = false
+python-versions = "*"
+groups = ["dev"]
+files = [
+    {file = "pytest-sugar-0.9.7.tar.gz", hash = "sha256:f1e74c1abfa55f7241cf7088032b6e378566f16b938f3f08905e2cf4494edd46"},
+    {file = "pytest_sugar-0.9.7-py2.py3-none-any.whl", hash = "sha256:8cb5a4e5f8bbcd834622b0235db9e50432f4cbd71fef55b467fe44e43701e062"},
+]
+
+[package.dependencies]
+packaging = ">=21.3"
+pytest = ">=6.2.0"
+termcolor = ">=2.1.0"
+
+[package.extras]
+dev = ["black", "flake8", "pre-commit"]
+
+[[package]]
+name = "pytest-timeout"
+version = "2.4.0"
+description = "pytest plugin to abort hanging tests"
+optional = false
+python-versions = ">=3.7"
+groups = ["dev"]
+files = [
+    {file = "pytest_timeout-2.4.0-py3-none-any.whl", hash = "sha256:c42667e5cdadb151aeb5b26d114aff6bdf5a907f176a007a30b940d3d865b5c2"},
+    {file = "pytest_timeout-2.4.0.tar.gz", hash = "sha256:7e68e90b01f9eff71332b25001f85c75495fc4e3a836701876183c4bcfd0540a"},
+]
+
+[package.dependencies]
+pytest = ">=7.0.0"
 
 [[package]]
 name = "python-dateutil"
@@ -1740,6 +2075,27 @@ files = [
 ]
 
 [[package]]
+name = "setuptools"
+version = "80.9.0"
+description = "Easily download, build, install, upgrade, and uninstall Python packages"
+optional = false
+python-versions = ">=3.9"
+groups = ["dev"]
+files = [
+    {file = "setuptools-80.9.0-py3-none-any.whl", hash = "sha256:062d34222ad13e0cc312a4c02d73f059e86a4acbfbdea8f8f76b28c99f306922"},
+    {file = "setuptools-80.9.0.tar.gz", hash = "sha256:f36b47402ecde768dbfafc46e8e4207b4360c654f1f3bb84475f0a28628fb19c"},
+]
+
+[package.extras]
+check = ["pytest-checkdocs (>=2.4)", "pytest-ruff (>=0.2.1) ; sys_platform != \"cygwin\"", "ruff (>=0.8.0) ; sys_platform != \"cygwin\""]
+core = ["importlib_metadata (>=6) ; python_version < \"3.10\"", "jaraco.functools (>=4)", "jaraco.text (>=3.7)", "more_itertools", "more_itertools (>=8.8)", "packaging (>=24.2)", "platformdirs (>=4.2.2)", "tomli (>=2.0.1) ; python_version < \"3.11\"", "wheel (>=0.43.0)"]
+cover = ["pytest-cov"]
+doc = ["furo", "jaraco.packaging (>=9.3)", "jaraco.tidelift (>=1.4)", "pygments-github-lexers (==0.0.5)", "pyproject-hooks (!=1.1)", "rst.linker (>=1.9)", "sphinx (>=3.5)", "sphinx-favicon", "sphinx-inline-tabs", "sphinx-lint", "sphinx-notfound-page (>=1,<2)", "sphinx-reredirects", "sphinxcontrib-towncrier", "towncrier (<24.7)"]
+enabler = ["pytest-enabler (>=2.2)"]
+test = ["build[virtualenv] (>=1.0.3)", "filelock (>=3.4.0)", "ini2toml[lite] (>=0.14)", "jaraco.develop (>=7.21) ; python_version >= \"3.9\" and sys_platform != \"cygwin\"", "jaraco.envs (>=2.2)", "jaraco.path (>=3.7.2)", "jaraco.test (>=5.5)", "packaging (>=24.2)", "pip (>=19.1)", "pyproject-hooks (!=1.1)", "pytest (>=6,!=8.1.*)", "pytest-home (>=0.5)", "pytest-perf ; sys_platform != \"cygwin\"", "pytest-subprocess", "pytest-timeout", "pytest-xdist (>=3)", "tomli-w (>=1.0.0)", "virtualenv (>=13.0.0)", "wheel (>=0.44.0)"]
+type = ["importlib_metadata (>=7.0.2) ; python_version < \"3.10\"", "jaraco.develop (>=7.21) ; sys_platform != \"cygwin\"", "mypy (==1.14.*)", "pytest-mypy"]
+
+[[package]]
 name = "six"
 version = "1.17.0"
 description = "Python 2 and 3 compatibility utilities"
@@ -1761,6 +2117,18 @@ groups = ["dev"]
 files = [
     {file = "smmap-5.0.2-py3-none-any.whl", hash = "sha256:b30115f0def7d7531d22a0fb6502488d879e75b260a9db4d0819cfb25403af5e"},
     {file = "smmap-5.0.2.tar.gz", hash = "sha256:26ea65a03958fa0c8a1c7e8c7a58fdc77221b8910f6be2131affade476898ad5"},
+]
+
+[[package]]
+name = "snowballstemmer"
+version = "3.0.1"
+description = "This package provides 32 stemmers for 30 languages generated from Snowball algorithms."
+optional = false
+python-versions = "!=3.0.*,!=3.1.*,!=3.2.*"
+groups = ["dev"]
+files = [
+    {file = "snowballstemmer-3.0.1-py3-none-any.whl", hash = "sha256:6cd7b3897da8d6c9ffb968a6781fa6532dce9c3618a4b127d920dab764a19064"},
+    {file = "snowballstemmer-3.0.1.tar.gz", hash = "sha256:6d5eeeec8e9f84d4d56b847692bacf79bc2c8e90c7f80ca4444ff8b6f2e52895"},
 ]
 
 [[package]]
@@ -1818,6 +2186,21 @@ files = [
 [package.extras]
 doc = ["reno", "sphinx"]
 test = ["pytest", "tornado (>=4.5)", "typeguard"]
+
+[[package]]
+name = "termcolor"
+version = "3.1.0"
+description = "ANSI color formatting for output in terminal"
+optional = false
+python-versions = ">=3.9"
+groups = ["dev"]
+files = [
+    {file = "termcolor-3.1.0-py3-none-any.whl", hash = "sha256:591dd26b5c2ce03b9e43f391264626557873ce1d379019786f99b0c2bee140aa"},
+    {file = "termcolor-3.1.0.tar.gz", hash = "sha256:6a6dd7fbee581909eeec6a756cff1d7f7c376063b14e4a298dc4980309e55970"},
+]
+
+[package.extras]
+tests = ["pytest", "pytest-cov"]
 
 [[package]]
 name = "toml"
@@ -1939,21 +2322,6 @@ socks = ["pysocks (>=1.5.6,!=1.5.7,<2.0)"]
 zstd = ["zstandard (>=0.18.0)"]
 
 [[package]]
-name = "vulture"
-version = "2.14"
-description = "Find dead code"
-optional = false
-python-versions = ">=3.8"
-groups = ["dev"]
-files = [
-    {file = "vulture-2.14-py2.py3-none-any.whl", hash = "sha256:d9a90dba89607489548a49d557f8bac8112bd25d3cbc8aeef23e860811bd5ed9"},
-    {file = "vulture-2.14.tar.gz", hash = "sha256:cb8277902a1138deeab796ec5bef7076a6e0248ca3607a3f3dee0b6d9e9b8415"},
-]
-
-[package.dependencies]
-tomli = {version = ">=1.1.0", markers = "python_version < \"3.11\""}
-
-[[package]]
 name = "watchdog"
 version = "6.0.0"
 description = "Filesystem events monitoring"
@@ -1999,5 +2367,5 @@ watchmedo = ["PyYAML (>=3.10)"]
 
 [metadata]
 lock-version = "2.1"
-python-versions = ">=3.10"
-content-hash = "6749e8a1863683b2a46725542bbe6818d7dced5544440c54da993e77e4f11eec"
+python-versions = ">=3.10, <4.0"
+content-hash = "e10b1a28dd0482a73cf5c89393acc30484d8328660d17f2664439a2edb6e12c7"

@@ -1,3 +1,5 @@
+"""Utility functions for plotly_calplot."""
+
 from datetime import date, datetime, timedelta
 
 import pandas as pd
@@ -54,14 +56,14 @@ def validate_date_column(date_column: pd.Series, date_fmt: str) -> pd.Series:
     elif date_column.dtype == "object":
         try:
             return pd.to_datetime(date_column, format=date_fmt)
-        except ValueError:
+        except ValueError as e:
             raise ValueError(
                 f"Date column is not in the {date_fmt} format. Use change date_fmt parameter to match your dates."  # noqa
-            )
+            ) from e
     try:
         if date_column.dt.tz is not None:
             return date_column.dt.tz_localize(None)
     except Exception as e:
         raise Exception(
             f"Exception {e}\nDate column is not in datetime format or not in the right string format. Please convert it to datetime format first or use the date_fmt parameter."  # noqa
-        )
+        ) from e

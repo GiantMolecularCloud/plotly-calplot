@@ -1,22 +1,26 @@
+"""Module for creating calendar heatmaps with Plotly. Provides main functions calplot and month_calplot."""
+
 from datetime import date
-from typing import Any, Dict, Optional, Union
+from typing import Any, Dict
 
 import numpy as np
 from pandas import DataFrame, Grouper, Series
 from plotly import graph_objects as go
 from plotly.subplots import make_subplots
 
-from plotly_calplot.layout_formatter import (
-    apply_general_colorscaling,
-    showscale_of_heatmaps,
-)
+from plotly_calplot.layout_formatter import apply_general_colorscaling, showscale_of_heatmaps
 from plotly_calplot.single_year_calplot import year_calplot
 from plotly_calplot.utils import fill_empty_with_zeros, validate_date_column
 
 
 def _get_subplot_layout(**kwargs: Any) -> go.Layout:
     """
-    Combines the default subplot layout with the customized parameters
+    Combines the default subplot layout with the customized parameters.
+
+    Parameters
+    ----------
+    **kwargs : Any
+        Custom layout parameters to override the defaults.
     """
     dark_theme: bool = kwargs.pop("dark_theme", False)
     yaxis: Dict[str, Any] = kwargs.pop("yaxis", {})
@@ -52,7 +56,7 @@ def _get_subplot_layout(**kwargs: Any) -> go.Layout:
     )
 
 
-def calplot(
+def calplot(  # noqa: CCR001
     data: DataFrame,
     x: str,
     y: str,
@@ -66,13 +70,13 @@ def calplot(
     years_title: bool = False,
     colorscale: str | list[tuple[int, str]] = "greens",
     title: str = "",
-    total_height: Union[int, None] = None,
+    total_height: int | None = None,
     space_between_plots: float = 0.08,
     showscale: bool = False,
-    text: Optional[str] = None,
+    text: str | None = None,
     years_as_columns: bool = False,
-    cmap_min: Optional[float] = None,
-    cmap_max: Optional[float] = None,
+    cmap_min: float | None = None,
+    cmap_max: float | None = None,
     start_month: int = 1,
     end_month: int = 12,
     date_fmt: str = "%Y-%m-%d",
@@ -114,7 +118,7 @@ def calplot(
     top_bottom_lines : bool = True
         If true will plot a separation line at the top and bottom.
         Together with month_lines, this makes the months enclosed.
-        
+
     gap : int = 1
         Controls the gap bewteen daily squares.
 
@@ -173,11 +177,11 @@ def calplot(
     replace_nans_with_zeros : bool = True
         If True, dates without data will be represented as 0.
         If False, dates without data will be represented as NaN.
-    
+
     hovertemplate : Optional[str] = None
         Custom hovertemplate for the heatmap squares.
         If None, a default hovertemplate will be used.
-    
+
     customdata : Optional[np.ndarray] = None
         Additional data to be used in the hovertemplate.
         Must be a 2D array of strings with as many rows as data and
@@ -225,9 +229,7 @@ def calplot(
     if cmap_max is None:
         cmap_max = data[y].max()
 
-    data = data[
-        data[x].dt.month.isin(np.arange(start_month, end_month + 1, 1).tolist())
-    ]
+    data = data[data[x].dt.month.isin(np.arange(start_month, end_month + 1, 1).tolist())]
 
     for i, year in enumerate(unique_years):
         selected_year_data = data.loc[data[x].dt.year == year]
@@ -235,17 +237,13 @@ def calplot(
             customdata = DataFrame(customdata)
             customdata[x] = selected_year_data[x]
 
-        selected_year_data = fill_empty_with_zeros(
-            selected_year_data, x, year, start_month, end_month
-        )
+        selected_year_data = fill_empty_with_zeros(selected_year_data, x, year, start_month, end_month)
         if replace_nans_with_zeros:
             selected_year_data[y] = selected_year_data[y].fillna(0)
-        
+
         if customdata is not None:
-            customdata = fill_empty_with_zeros(
-                customdata, x, year, start_month, end_month
-            )
-            customdata = customdata.to_numpy()
+            df_customdata = fill_empty_with_zeros(customdata, x, year, start_month, end_month)
+            customdata = df_customdata.to_numpy()
 
         year_calplot(
             selected_year_data,
@@ -290,7 +288,7 @@ def month_calplot(
     colorscale: str = "greens",
     title: str = "",
     year_height: int = 30,
-    total_height: Union[int, None] = None,
+    total_height: int | None = None,
     showscale: bool = False,
     date_fmt: str = "%Y-%m-%d",
 ) -> go.Figure:
@@ -342,20 +340,20 @@ def month_calplot(
     """
     if data is None:
         if not isinstance(x, Series):
-            x = Series(x, dtype="datetime64[ns]", name="x")
+            x_ = Series(x, dtype="datetime64[ns]", name="x")
 
         if not isinstance(y, Series):
-            y = Series(y, dtype="float64", name="y")
+            y_ = Series(y, dtype="float64", name="y")
 
-        data = DataFrame({x.name: x, y.name: y})
+        data = DataFrame({x_.name: x, y_.name: y})
 
-        x = x.name
-        y = y.name
+        x = x_.name
+        y = y_.name
 
     data[x] = validate_date_column(data[x], date_fmt)
 
-    gData = data.set_index(x)[y].groupby(Grouper(freq="M")).sum()
-    unique_years = gData.index.year.unique()
+    group_data = data.set_index(x)[y].groupby(Grouper(freq="M")).sum()
+    unique_years = group_data.index.year.unique()
     unique_years_amount = len(unique_years)
 
     if total_height is None:
@@ -376,12 +374,12 @@ def month_calplot(
     )
 
     # hovertext = _gen_hoverText(gData.index.month, gData.index.year, gData)
-    hovertext = gData.apply(lambda x: f"{x:.0f}")
+    hovertext = group_data.apply(lambda x: f"{x:.0f}")
 
     cplt = go.Heatmap(
-        x=gData.index.month,
-        y=gData.index.year,
-        z=gData,
+        x=group_data.index.month,
+        y=group_data.index.year,
+        z=group_data,
         name=title,
         showscale=showscale,
         xgap=gap,
