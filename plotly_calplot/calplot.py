@@ -76,6 +76,7 @@ def calplot(
     end_month: int = 12,
     date_fmt: str = "%Y-%m-%d",
     skip_empty_years: bool = False,
+    replace_nans_with_zeros: bool = True,
 ) -> go.Figure:
     """
     Yearly Calendar Heatmap
@@ -161,6 +162,10 @@ def calplot(
         If True, will skip years where the sum of y is less than 1.
         This is useful for datasets where some years may not have any data,
         preventing empty subplots in the calendar heatmap.
+
+    replace_nans_with_zeros : bool = True
+        If True, will replace NaN values in the y column with zeros.
+        This can fix some display issues for particular datasets.
     """
     data[x] = validate_date_column(data[x], date_fmt)
     unique_years = data[x].dt.year.unique()
@@ -213,6 +218,8 @@ def calplot(
         selected_year_data = fill_empty_with_zeros(
             selected_year_data, x, year, start_month, end_month
         )
+        if replace_nans_with_zeros:
+            selected_year_data[y] = selected_year_data[y].fillna(0)
 
         year_calplot(
             selected_year_data,
