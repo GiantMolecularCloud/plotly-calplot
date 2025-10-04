@@ -75,6 +75,7 @@ def calplot(
     start_month: int = 1,
     end_month: int = 12,
     date_fmt: str = "%Y-%m-%d",
+    skip_empty_years: bool = False,
 ) -> go.Figure:
     """
     Yearly Calendar Heatmap
@@ -155,9 +156,19 @@ def calplot(
         date format for the date column in data, defaults to "%Y-%m-%d"
         If the date column is already in datetime format, this parameter
         will be ignored.
+
+    skip_empty_years : bool = False
+        If True, will skip years where the sum of y is less than 1.
+        This is useful for datasets where some years may not have any data,
+        preventing empty subplots in the calendar heatmap.
     """
     data[x] = validate_date_column(data[x], date_fmt)
     unique_years = data[x].dt.year.unique()
+
+    # Filter out years where the sum of y is less than 1 if skip_empty_years is True
+    if skip_empty_years:
+        unique_years = np.array([year for year in unique_years if data.loc[data[x].dt.year == year, y].sum() >= 1])
+
     unique_years_amount = len(unique_years)
     if years_title:
         subplot_titles = unique_years.astype(str)

@@ -6,6 +6,7 @@ Making it easier to visualize and costumize time relevant or time series data wi
 - Added this fork info
 - Open up plotly dependency to `>=5.4.0` (might causes issues in the future with new plotly versions)
 - Fix small details (type hints, ...)
+- Include skip_empty_years from [juan11iguel/plotly-calplot](https://github.com/juan11iguel/plotly-calplot)
 
 
 ## Description
